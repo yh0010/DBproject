@@ -1,8 +1,7 @@
 <?php
-//session_start();
 
 include 'connectdb.php';
-
+session_start();
 
 if (isset($_POST['username']) && isset($_POST['password'])) {
     function validate($data){
@@ -22,12 +21,13 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         exit();
     }
     else{
-        $stmt = $conn->prepare("SELECT * FROM webuser WHERE username = '$username' and password = '$password'");
+        $stmt = $conn->prepare("SELECT * FROM webuser WHERE BINARY username = '$username' and BINARY password = '$password'");
         $stmt->execute();
         $stmt->store_result();
         $num_of_rows = $stmt->num_rows;
         if ($num_of_rows == 1) {
-            header("Location: home.php");
+            $_SESSION['username'] = $username;
+            header("Location: dashboard.php");
             exit();
         }
         else{

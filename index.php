@@ -14,8 +14,12 @@
     <?php } ?>
     <table>
         <tr>
-            <td>Username:<input type="text"  name="username"></td>
-            <td>Password:<input type="text"  name="password"></td>
+            <td>Username:</td>
+            <td><input type="text"  name="username"></td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td><input type="text"  name="password"></td>
         </tr>
     </table>
     <button type="submit">Login</button>
