@@ -24,6 +24,7 @@ Potential add-ons:
 * User can edit profile
 * login password cover and cookies
 * Adjust UI
+* Auto_increment problem, mysql innoDB does not allow resset value to be less than current
 
 #### -------May 7th--------
 
