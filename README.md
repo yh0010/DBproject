@@ -26,6 +26,7 @@ Potential add-ons:
 * Adjust UI
 * Auto_increment problem, mysql innoDB does not allow resset value to be less than current
 * Add warnings when no question/answer is found
+* the thumbs_up is not correctly reflected on user account
 
 #### -------May 7th--------
 
