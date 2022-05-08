@@ -11,4 +11,4 @@ For registration:
 
 For Dashboard:
 1. Username is displayed.
-2. Can be able to log out on this page and redirect to log in page.
+2. Can be able to log out on this page and redirect to log in page. 
