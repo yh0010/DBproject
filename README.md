@@ -3,12 +3,12 @@ Update your notes here:
 #### -------May 8th--------
 Modified:
 - dashboard.php
-- reg_post.php
+- reg_post.php (added $feedback to store fetched rows, if no rows found, then continue; without this line the code will break)
 
 Create new files:
 - create_question.php
-- showAns_byTopic.php
-- show_answer.php
+- showAns_byTopic.php (show answer from select topic)
+- show_answer.php (show answer from typing search)
 
 Update features:
 1. User can post new question
