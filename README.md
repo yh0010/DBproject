@@ -25,6 +25,7 @@ Potential add-ons:
 * login password cover and cookies
 * Adjust UI
 * Auto_increment problem, mysql innoDB does not allow resset value to be less than current
+* Add warnings when no question/answer is found
 
 #### -------May 7th--------
 
