@@ -27,7 +27,9 @@ if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['passwor
         // check if the username is already in the database
         $check_query =  "SELECT * FROM webuser WHERE BINARY username = '$username'";
         $check_result = mysqli_query($conn, $check_query);
-        if ($check_result){
+        $feedback = mysqli_fetch_all($check_result, MYSQLI_ASSOC);
+
+        if ($feedback){
             header("Location: registration.php?error=The username is already used, please enter another one.");
             exit();
         }
