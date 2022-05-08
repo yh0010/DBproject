@@ -29,6 +29,7 @@ Potential add-ons:
 * the thumbs_up is not correctly reflected on user account
 * B+ tree acceletrate?
 * ??git issue ??multi threading
+* lexical relevance ranking?
 
 #### -------May 7th--------
 
