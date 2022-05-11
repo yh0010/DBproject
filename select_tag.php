@@ -1,5 +1,5 @@
 
-//This page uses for tag selection, its not completed yet.
+<!-- This page uses for tag selection, its not completed yet. -->
 
 <?php
 include('connectdb.php');
