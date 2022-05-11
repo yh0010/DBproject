@@ -12,17 +12,18 @@
     <p class="error"><?php echo $_GET['error']; ?></p>
 
     <?php } ?>
-    <table>
-        <tr>
-            <td>Username:</td>
-            <td><input type="text"  name="username"></td>
-        </tr>
-        <tr>
-            <td>Password:</td>
-            <td><input type="text"  name="password"></td>
-        </tr>
-    </table>
-    <button type="submit">Login</button>
+    
+    <div>
+      <label>Username: </label>
+      <input type="text" name="username">
+    </div>
+    <br>
+    <div>
+      <label>Password: </label>
+      <input type="password" name="password">
+    </div>
+    <br>
+    <input type="submit" name="submit" value="Submit">
 
 </form>
 

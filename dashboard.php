@@ -11,7 +11,7 @@ include('connectdb.php');
 </head>
 <body>
 <div class="form">
-    <p>Hey, <?php echo $_SESSION['username']; ?>! <a href="logout.php">Logout</a></p>
+    <p>Hey, <?php echo $_SESSION['username']; ?>! <a href="logout.php">Logout</a><br><a href="mypage.php">Go to my page</a></p> 
     <p>You are now in user dashboard page &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button type='button' onclick="location.href='create_question.php';">Ask New Question</button></p>
 
 

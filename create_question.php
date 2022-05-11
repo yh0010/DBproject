@@ -1,3 +1,8 @@
+<?php
+include('connectdb.php');
+include("auth_session.php");
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,22 +11,21 @@
 </head>
 <body>
     <button type='button' onclick="location.href='dashboard.php';">Return to dashboard</button>
-    <p><a href="logout.php">Logout</a></p>
+    <p><a href="logout.php">Logout</a></p><br><a href="select_tag.php">select tags</a>
+    
     <form method='post'>
-    <h3>Question Title</h3>
-    <h5>Be specific and imagine you are asking a question to another person</h5>
-        <textarea cols=80 rows=2 class="form-control" id="title" name="title" placeholder="e.g. Is there an R function for finding the index? [include question mark]"></textarea>
-    <h3>Body</h3>
-    <h5>Include all the information someone would need to answer your question</h5>
-        <textarea name="body" cols=100 rows=40 class="form-control" ></textarea>
-        <div><input type="submit" name="submit" value="Submit"></div>
-    </form>
+        <h3>Question Title</h3>
+            <h5>Be specific and imagine you are asking a question to another person</h5>
+            <textarea cols=80 rows=2 class="form-control" id="title" name="title" placeholder="e.g. Is there an R function for finding the index? [include question mark]"></textarea>
+        <h3>Body</h3>
+            <h5>Include all the information someone would need to answer your question</h5>
+            <textarea name="body" cols=100 rows=40 class="form-control" ></textarea>
+
+    <div><input type="submit" name="submit" value="Next: Select tags"></div>
 </body>
 </html>
 
 <?php
-include('connectdb.php');
-include("auth_session.php");
 
     if (isset($_POST['submit'])){
         if (empty($_POST['title']) || empty($_POST['body'])){
@@ -35,7 +39,7 @@ include("auth_session.php");
             VALUES (".$_SESSION['uid'].", '$title', '$body', CURRENT_TIMESTAMP, 'N')";
             $result = mysqli_query($conn, $sql);
             if ($result) {
-                echo 'your question is successfully posted';
+                header('Location:select_tag.php');
                 exit();
             }
             else {
@@ -45,3 +49,5 @@ include("auth_session.php");
         }
     }
 ?>
+
+

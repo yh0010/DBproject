@@ -12,28 +12,28 @@ include("auth_session.php");
 include('connectdb.php');
 
 if (isset($_SESSION['ButtonName'])) {
-    echo '<p>'.$_SESSION['ButtonName'].'</p>';
+    echo '<p><h3>'.$_SESSION['ButtonName'].'</h3></p>';
     //$_SESSION['other_quest'] = 'Y';
     $sql_quest = "SELECT * FROM question JOIN webuser USING(uid) WHERE title = '".$_SESSION['ButtonName']."'";
     $row = mysqli_fetch_row(mysqli_query($conn, $sql_quest));
-    echo 'Asked by: '.$row[7]."<br>";
-    echo 'Posted by: '.$row[4]."<br>";
-    echo 'User Status: '.$row[14]."<br>";
-    echo 'Points: '.$row[15]."<br>";
+    echo '<h4> Asked by: '.$row[7]."<br>".'Posted by: '.$row[4]."<br>".'User Status: '.$row[14]."<br>".'Points: '.$row[15]."<br></h4>";
 
-    $sql_answer = "SELECT * FROM answer JOIN webuser USING(uid) JOIN question USING(qid) WHERE title = '".$_SESSION['ButtonName']."'";
+    $sql_answer = "SELECT * FROM answer JOIN webuser USING(uid) JOIN question USING(qid) WHERE title = '".$_SESSION['ButtonName']."' ORDER BY atime DESC";
     $res = mysqli_query($conn, $sql_answer);
     $ret = mysqli_fetch_all($res, MYSQLI_ASSOC);
     if ($res){}else{echo mysqli_error($conn);}
 
+    if (empty($ret)){echo "<h4>No answer is found.</h4>";}
+    $count = 1;
     foreach ($ret as $item):
         echo '<p>'.
-            $item['aid']."<br>".$item['answer']."<br>".
+            $count."<br>".$item['answer']."<br>".
             $item['atime']."<br>".$item['username']."\n".$item['status']."\n".$item['points']
         .'</p>';
-        $aid = $item['aid'];
-        $qid = $item['qid'];
+        $count += 1;
     endforeach;
+    $aid = $count;
+    $qid = $ret[0];
     echo '<div>'.
         '<form method="post">'.
             '<textarea name="answer" cols=50 rows=3 placeholder="Write your new answer here..."></textarea>'.
@@ -45,7 +45,7 @@ if (isset($_SESSION['ButtonName'])) {
         if (!empty($_POST['answer'])){
             $answer = $_POST['answer'];
             $query = "INSERT INTO answer(aid, qid, uid, answer, atime, thumb_up) 
-            VALUES ($aid+1, $qid, ".$_SESSION['uid'].", '$answer', CURRENT_TIMESTAMP, 0)";
+            VALUES ($aid, $qid, ".$_SESSION['uid'].", '$answer', CURRENT_TIMESTAMP, 0)";
             $query_result   = mysqli_query($conn, $query);
             if ($query_result) {
                 // success
