@@ -32,12 +32,12 @@ if (isset($_SESSION['ButtonName'])) {
             $item['atime']."<br>".$item['username']."\n".$item['status']."\n".$item['points']
         .'</p>';
         $count += 1;
-        $qid = $item['qid'];
     endforeach;
 
     //obtain the next aid and the current qid to use for adding new answer
     $aid = $count;
-    
+    $qid = $row[1];
+
     echo '<div>'.
         '<form method="post">'.
             '<textarea name="answer" cols=50 rows=3 placeholder="Write your new answer here..."></textarea>'.
