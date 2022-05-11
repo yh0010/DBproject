@@ -12,7 +12,7 @@
 * cookies?
 #### -------May 11th--------
 Modified files & Updated features:
-- showAns_byTopic.php (enabld 2nd-level-topic selection search)
+- showAns_byTopic.php (enabld 2nd&3rd-level-topic selection search)
 - show_answer.php (add warnings, bolded headlines, answer displa New->Old)
 - index.php (change table structure to div format so that password can be covered)
 - create_question.php (enable in-complete tag-selection feature)
