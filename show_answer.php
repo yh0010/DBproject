@@ -11,9 +11,9 @@
 include("auth_session.php");
 include('connectdb.php');
 
+//display all questions listed under a certain topic where topicname = ButtonName
 if (isset($_SESSION['ButtonName'])) {
     echo '<p><h3>'.$_SESSION['ButtonName'].'</h3></p>';
-    //$_SESSION['other_quest'] = 'Y';
     $sql_quest = "SELECT * FROM question JOIN webuser USING(uid) WHERE title = '".$_SESSION['ButtonName']."'";
     $row = mysqli_fetch_row(mysqli_query($conn, $sql_quest));
     echo '<h4> Asked by: '.$row[7]."<br>".'Posted by: '.$row[4]."<br>".'User Status: '.$row[14]."<br>".'Points: '.$row[15]."<br></h4>";
@@ -23,6 +23,7 @@ if (isset($_SESSION['ButtonName'])) {
     $ret = mysqli_fetch_all($res, MYSQLI_ASSOC);
     if ($res){}else{echo mysqli_error($conn);}
 
+    //give warning when no answer is found, otherwise display answers by timestamp New->Old and list answerer's info
     if (empty($ret)){echo "<h4>No answer is found.</h4>";}
     $count = 1;
     foreach ($ret as $item):
@@ -32,6 +33,8 @@ if (isset($_SESSION['ButtonName'])) {
         .'</p>';
         $count += 1;
     endforeach;
+
+    //obtain the next aid and the current qid to use for adding new answer
     $aid = $count;
     $qid = $ret[0];
     echo '<div>'.
@@ -60,6 +63,9 @@ if (isset($_SESSION['ButtonName'])) {
             echo "Cannot leave it blank";
         }
     }
+
+    //enable similar questions display even when user is currently viewing a specific question, so that user will need not to return back to
+    //dashboard to re-search again
     echo "<br>"."<h3>See Similar Questions:</h3>"."<br>";
     if (isset($_SESSION['retTopic'])){$list = $_SESSION['retTopic'];}
     if (isset($_SESSION['DashButton'])){$list = $_SESSION['return'];}

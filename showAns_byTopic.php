@@ -1,7 +1,9 @@
+/*
+Similar functionality as to show_answer.php
+*/
 <button type='button' onclick="location.href='dashboard.php';">Return to dashboard</button>
 
 <?php
-
 include("auth_session.php");
 include('connectdb.php');
 
@@ -14,7 +16,6 @@ include('connectdb.php');
     $ret_topic = mysqli_fetch_all($res_topic, MYSQLI_ASSOC);
     $ret_subtopic = mysqli_fetch_all($res_subtopic, MYSQLI_ASSOC);
     $_SESSION['retTopic'] = $ret_topic;
-
 
     if (empty($ret_topic)){echo "No question is found.";}
     foreach ($ret_topic as $item):
