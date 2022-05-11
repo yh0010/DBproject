@@ -1,9 +1,9 @@
-/*
+<!-- 
 In this file, user can create new question in which the new question will be store into database and can be viewed through
 dashboard searching.
 User would need to provid both the question title and body before contintue to next step.
-User will need to select tags for the question. The tags will later be added into 'belongs' table, this part is incomplete.
-*/
+User will need to select tags for the question. The tags will later be added into 'belongs' table, this part is incomplete. -->
+
 <?php
 include('connectdb.php');
 include("auth_session.php");

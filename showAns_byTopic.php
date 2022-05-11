@@ -1,6 +1,6 @@
-/*
-Similar functionality as to show_answer.php
-*/
+
+//Similar functionality as to show_answer.php
+
 <button type='button' onclick="location.href='dashboard.php';">Return to dashboard</button>
 
 <?php
