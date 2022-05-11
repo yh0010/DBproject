@@ -1,4 +1,25 @@
-Update your notes here:
+### Potential add-ons:
+* problem marked as 'solved' && user can select best answer
+* Adjust UI
+* Auto_increment problem, mysql innoDB does not allow resset value to be less than current
+* User can see its own recent activity, User can see their own Q & A
+* bookmark feature
+* User can edit profile
+* the thumbs_up is not correctly reflected on user account
+* B+ tree acceletrate?
+* ??git issue ??multi threading
+* lexical relevance ranking?
+* cookies?
+#### -------May 11th--------
+Modified files & Updated features:
+- showAns_byTopic.php (enabld 2nd-level-topic selection search)
+- show_answer.php (add warnings, bolded headlines, answer displa New->Old)
+- index.php (change table structure to div format so that password can be covered)
+- create_question.php (enable in-complete tag-selection feature)
+
+Create new files:
+- mypage.php (empty)
+- select_tag.php (might be combined/removed later)
 
 #### -------May 8th--------
 Modified:
@@ -15,21 +36,7 @@ Update features:
 2. User can post new answer to other people's question
 3. Search question by typing and search question by select different 1st level topic
 
-Potential add-ons:
-* provide 2nd level topic search after select 1st level
-* User can see their own Q & A
-* rank answer from New -> Old
-* User can see its own recent activity
-* bookmark feature
-* User can edit profile
-* login password cover and cookies
-* Adjust UI
-* Auto_increment problem, mysql innoDB does not allow resset value to be less than current
-* Add warnings when no question/answer is found
-* the thumbs_up is not correctly reflected on user account
-* B+ tree acceletrate?
-* ??git issue ??multi threading
-* lexical relevance ranking?
+
 
 #### -------May 7th--------
 
