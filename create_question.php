@@ -45,7 +45,8 @@ include("auth_session.php");
             VALUES (".$_SESSION['uid'].", '$title', '$body', CURRENT_TIMESTAMP, 'N')";
             $result = mysqli_query($conn, $sql);
             if ($result) {
-                header('Location:select_tag.php');
+                //header('Location:select_tag.php');
+                echo "Your question is successfully submitted";
                 exit();
             }
             else {
