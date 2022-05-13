@@ -1,24 +1,50 @@
+<?php
+include("auth_session.php");
+include('connectdb.php');
+require 'format.inc.php';
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-    <title>Home</title>
+    <title>Answers</title>
+    <link href="styles.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
-<button type='button' onclick="location.href='dashboard.php';">Return to dashboard</button>
+<?php echo present_header("CS Answers", $_SESSION['username']); ?>
+
+<div class="content">
 
 <?php
-include("auth_session.php");
-include('connectdb.php');
+
+function validate_escape($conn, $data){
+    $data = stripslashes($data);
+    $data = mysqli_real_escape_string($conn, $data);
+    return $data;
+}
+
+function validate($data){
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
 
 //display all questions listed under a certain topic where topicname = ButtonName
 if (isset($_SESSION['ButtonName'])) {
     echo '<p><h3>'.$_SESSION['ButtonName'].'</h3></p>';
-    $sql_quest = "SELECT * FROM question JOIN webuser USING(uid) WHERE title = '".$_SESSION['ButtonName']."'";
+
+    $question_title = validate_escape($conn, $_SESSION['ButtonName']);
+
+    $sql_quest = "SELECT * FROM question JOIN webuser USING(uid) WHERE title = '$question_title'";
     $row = mysqli_fetch_row(mysqli_query($conn, $sql_quest));
+    echo "$row[3]";
     echo '<h4> Asked by: '.$row[7]."<br>".'Posted by: '.$row[4]."<br>".'User Status: '.$row[14]."<br>".'Points: '.$row[15]."<br></h4>";
 
-    $sql_answer = "SELECT * FROM answer JOIN webuser USING(uid) JOIN question USING(qid) WHERE title = '".$_SESSION['ButtonName']."' ORDER BY atime DESC";
+    $sql_answer = "SELECT * FROM answer JOIN webuser USING(uid) JOIN question USING(qid) WHERE title = '$question_title' ORDER BY atime DESC";
     $res = mysqli_query($conn, $sql_answer);
     $ret = mysqli_fetch_all($res, MYSQLI_ASSOC);
     if ($res){}else{echo mysqli_error($conn);}
@@ -70,12 +96,17 @@ if (isset($_SESSION['ButtonName'])) {
     echo "<br>"."<h3>See Similar Questions:</h3>"."<br>";
     if (isset($_SESSION['retTopic'])){$list = $_SESSION['retTopic'];}
     if (isset($_SESSION['DashButton'])){$list = $_SESSION['return'];}
+
+
+
     foreach ($list as $item):
+        $question_title_similar = validate($item['title']);
+        $question_body_similar = validate($item['body']);
         echo '<p>';
         echo 
         "<form method='post'>
-        <input type='submit' name='q_button' value='".$item['title']."'>
-        </form>"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$item['body']."<br>";
+        <input type='submit' name='q_button' value='$question_title_similar'>
+        </form>"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$question_body_similar."<br>";
         echo '<p>';
 
     endforeach;}
@@ -84,5 +115,8 @@ if (isset($_SESSION['ButtonName'])) {
         header('Location: show_answer.php');
     }
 ?>
+</div>
+
+
 </body>
 </html>

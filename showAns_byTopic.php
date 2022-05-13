@@ -1,10 +1,31 @@
 <!-- Similar functionality as to show_answer.php -->
 
-<button type='button' onclick="location.href='dashboard.php';">Return to dashboard</button>
-
 <?php
 include("auth_session.php");
 include('connectdb.php');
+require 'format.inc.php';
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <title>Dashboard</title>
+    <link href="styles.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+
+<?php echo present_header("CS Answers", $_SESSION['username']); ?>
+
+<div class="content">
+
+<?php
+function validate($data){
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
 
     echo '<h2>'.$_SESSION['TopicName'].'</h2>';
 
@@ -16,13 +37,17 @@ include('connectdb.php');
     $ret_subtopic = mysqli_fetch_all($res_subtopic, MYSQLI_ASSOC);
     $_SESSION['retTopic'] = $ret_topic;
 
+
     if (empty($ret_topic)){echo "No question is found.";}
     foreach ($ret_topic as $item):
         echo '<p>';
+
+        $question_title = validate($item['title']);
+        $question_body = validate($item['body']);
         echo 
         "<form method='post'>
-        <input type='submit' name='1st_lvl_button' value='".$item['title']."'>
-        </form>"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$item['body']."<br>";
+        <input type='submit' name='1st_lvl_button' value='$question_title'>
+        </form>"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$question_body."<br>";
         echo '<p>';
 
     endforeach;
@@ -32,7 +57,7 @@ include('connectdb.php');
     foreach ($ret_subtopic as $item):
 
         echo 
-        "<form method='post'>
+        "<form class = 'topics_form' method='post'>
         <input type='submit' name='2nd_lvl_button' value='".$item['topicname']."'>
         </form>";
     
@@ -48,3 +73,8 @@ include('connectdb.php');
         header('Location: showAns_byTopic.php');
     }
 ?>
+
+</div>
+
+</body>
+</html>

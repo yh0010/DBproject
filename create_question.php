@@ -7,6 +7,7 @@ User will need to select tags for the question. The tags will later be added int
 <?php
 include('connectdb.php');
 include("auth_session.php");
+require 'format.inc.php';
 ?>
 
 <!DOCTYPE html>
@@ -14,10 +15,13 @@ include("auth_session.php");
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     <title>New_Question</title>
+    <link href="styles.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
-    <button type='button' onclick="location.href='dashboard.php';">Return to dashboard</button>
-    <p><a href="logout.php">Logout</a></p><br><a href="select_tag.php">select tags</a>
+
+<?php echo present_header("CS Answers", $_SESSION['username']); ?>
+
+<div class="content">
     
     <form method='post'>
         <h3>Question Title</h3>
@@ -28,6 +32,7 @@ include("auth_session.php");
             <textarea name="body" cols=100 rows=40 class="form-control" ></textarea>
 
     <div><input type="submit" name="submit" value="Next: Select tags"></div>
+</div>
 </body>
 </html>
 
