@@ -10,6 +10,17 @@
 * ??git issue ??multi threading
 * lexical relevance ranking?
 * cookies?
+
+#### -------May 12--------
+Fixed bug: question titles with '' in them has errors.
+Added question body in show_answer.php page
+Created a basic ui for several pages.
+Shows the information and Q&As in user’s page. 
+The user's status and points are computed every time when enters user page in order to keep them up to date.
+Updating the user’s profile is completed.
+
+PS: query 3 from project part 1 is updated.
+
 #### -------May 11th--------
 Modified files & Updated features:
 - showAns_byTopic.php (enabld 2nd&3rd-level-topic selection search)
