@@ -2,7 +2,6 @@
 include("auth_session.php");
 include('connectdb.php');
 require 'format.inc.php';
-$uid
 ?>
 
 <!DOCTYPE html>
@@ -84,6 +83,9 @@ $uid
             echo mysqli_error($conn);
         }
 
+        //assign current qid to variable $qid
+        $qid = $row[1];
+
         //give warning when no answer is found, otherwise display answers by timestamp New->Old and list answerer's info
         if (empty($ret)) {
             echo "<h4>No answer is found.</h4>";
@@ -92,17 +94,30 @@ $uid
         if (isset($_GET['error'])) { ?>
 
     <p class="error"><?php echo $_GET['error']; ?></p>
+    
 
     <?php }
         echo "<div class='answer'>";
         echo "<h3>Answers:</h3>";
+        $sql_check_best = "SELECT best FROM question WHERE qid = $qid AND best is not null";
+        $res_best = mysqli_fetch_row(mysqli_query($conn, $sql_check_best));
+        if (!empty($res_best)){
+            echo "Select Best Answer:"."<br>";
+            $sql_display_best = "SELECT answer FROM answer JOIN webuser USING(uid) JOIN question USING(qid) WHERE title = '$question_title' AND aid = $res_best[0]";
+            $res__display_best = mysqli_fetch_row(mysqli_query($conn, $sql_display_best));
+            echo $res__display_best[0];
+        }
 
         $count = 1;
         foreach ($ret as $item):
             $nam = $item['username'];
             $aid_real = $item['aid'];
             echo "<hr>";
-
+            if ($r_row[1] == $_SESSION['uid']){
+            echo "<form method='post'>
+            <input type='submit' class='form-control' name='best_button' value='choose best answer($aid_real)'>
+            </form>";
+        }
 
             echo "<div class='container'><div id='left-10'>";
             echo "<form method='post'><button type='submit' name='upvote_button' value=vote($aid_real)$nam><img src='thumbup.jpg' height='20'></button>" . "\n" . $item['thumb_up'] . "</form>";
@@ -117,14 +132,28 @@ $uid
 
             $count += 1;
         endforeach;
-        //obtain the next aid and the current qid to use for adding new answer
+        
+        //assign next-in-line aid to variable $aid
         $aid = $count;
-        $qid = $row[1];
+
+        if (isset($_POST['best_button']) && ($r_row[1] == $_SESSION['uid'])) {
+            $best_aid = $_POST['best_button'][-2];
+            echo "You have chosen ".$best_aid. " as your best answer";
+            $sql_best = "UPDATE question
+            SET
+                best = $best_aid,
+                qtime = qtime
+            WHERE
+                qid = $r_row[0]";
+            $res_best = mysqli_query($conn, $sql_best);
+            echo("<script>location.href = 'show_answer.php';</script>");
+        }
+
 
         if (isset($_POST['upvote_button'])) {
             $vote_nam = substr($_POST['upvote_button'], 7);
             $vote_aid = $_POST['upvote_button'][5];
-            //(select uid from webuser where username = '$vote_nam')
+
             $sql_check_vote = "SELECT * FROM vote_track WHERE uid = " . $_SESSION['uid'] . " and qid = $qid and aid = $vote_aid";
             $res_check_vote = mysqli_fetch_all(mysqli_query($conn, $sql_check_vote));
 
@@ -173,7 +202,7 @@ $uid
                 }
                 exit();
             } else {
-                echo "Cannot leave it blank";
+                echo "<p class='message'>You cannot submit blank answer</p>";
             }
         }
 

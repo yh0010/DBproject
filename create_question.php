@@ -25,7 +25,7 @@ require 'format.inc.php';
 </form>
 <h2>Please select tags first to begin..</h2>
         <?php
-            $mysqli = NEW mysqli('localhost', 'root','mysqldbSECRET', 'question_answering');
+            $mysqli = NEW mysqli('localhost', 'elaina2','123123', 'project');
             $set = $mysqli->query("SELECT tid, topicname FROM topic WHERE tid < 7");
         ?>
     <div>
@@ -77,7 +77,8 @@ require 'format.inc.php';
     <SELECT id=s3  onchange='reload3()' name="3rd-lvl-topic" class='form-control';>
             <option value="0">Select tag</option>
             <?php while ($row = $r_set2->fetch_assoc()){
-                echo "<option value=$row[topicname]>$row[topicname]</option>";
+                $topic_name = $row['topicname'];
+                echo "<option value='$topic_name'>$topic_name</option>";
             }?>
 
     </SELECT>
@@ -110,7 +111,13 @@ require 'format.inc.php';
         if (!empty($_SESSION['cat3'])){echo $_SESSION['cat3'];}
         
     ?>
-    
+    <form method='post'><div><br><input type="submit" name="clear_button" value="Clear tags"></div></form>
+    <?php if (isset($_POST['clear_button'])) {
+        unset($_SESSION['cat']);
+        unset($_SESSION['cat2']);
+        unset($_SESSION['cat3']);
+        echo("<script>location.href = 'create_question.php';</script>");
+    }?>
     <form method='post'>
         <br><h2>Question Title</h2>
             <h5>Be specific and imagine you are asking a question to another person</h5>
@@ -125,6 +132,7 @@ require 'format.inc.php';
 
 <?php
 
+if (!empty($_SESSION['cat']) || !empty($_SESSION['cat2'])){
     if (isset($_POST['submit'])){
         if (empty($_POST['title']) || empty($_POST['body'])){
 
@@ -163,12 +171,15 @@ require 'format.inc.php';
 
             }
             else {
-                echo 'Failed to post';
+                echo "<p class='message'>Failed to post</p>";
                 echo 'Error: ' . mysqli_error($conn);
                 exit();
             }
         }
     }
+} else {
+    echo "<p class='message'>Please select tag before continue</p>";
+}
 ?>
 </div>
 </body>

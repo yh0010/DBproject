@@ -87,7 +87,7 @@ if (isset($_POST['submit'])) {
 
         endforeach;
     } else {
-        echo '<br>'.'Please type a question/key word to begin the search';
+        echo "<p class='message'>Please type a question/key word to begin the search</p>";
     }
 }
 
