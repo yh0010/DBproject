@@ -143,9 +143,14 @@ if (!empty($_SESSION['cat']) || !empty($_SESSION['cat2'])){
             $title = $_POST['title'];
             $body = $_POST['body'];
 
-            $sql = "INSERT INTO question(uid, title, body, qtime, resolved) 
-            VALUES (".$_SESSION['uid'].", '$title', '$body', CURRENT_TIMESTAMP, 'Unsolved')";
-            $result = mysqli_query($conn, $sql);
+            $sql_check_duplicates = "SELECT IFNULL(title, 0) FROM question WHERE title = '$title'";
+            $res_check_dup = mysqli_fetch_row(mysqli_query($conn, $sql_check_duplicates));
+            if ($res_check_dup){}else{echo 'Error: ' . mysqli_error($conn);}
+            if ($res_check_dup == 0){
+                $sql = "INSERT INTO question(uid, title, body, qtime, resolved) 
+                VALUES (".$_SESSION['uid'].", '$title', '$body', CURRENT_TIMESTAMP, 'Unsolved')";
+                $result = mysqli_query($conn, $sql);
+            
             if ($result) {
                 if (!empty($_SESSION['cat'])){
                     $sql_tag1 = "insert into belongs values ((select qid from question where qid = (select max(qid) from question)), (select tid from topic where topicname = '".$_SESSION['cat']."'))";
@@ -175,6 +180,9 @@ if (!empty($_SESSION['cat']) || !empty($_SESSION['cat2'])){
                 echo 'Error: ' . mysqli_error($conn);
                 exit();
             }
+        }else {
+            echo "<p class='message'>This is a duplicated question, please use direct search to see answers.</p>";
+        }
         }
     }
 } else {
