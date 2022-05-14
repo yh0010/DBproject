@@ -12,7 +12,7 @@ $username = $_SESSION['username'];
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     <title>Edit <?php echo $_SESSION['username']; ?>'s profile</title>
-    <link href="style.css" type="text/css" rel="stylesheet" />
+    <link href="styles.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
 

@@ -9,7 +9,7 @@ require 'format.inc.php';
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     <title>Dashboard</title>
-    <link href="style.css" type="text/css" rel="stylesheet"/>
+    <link href="styles.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 <?php echo present_header($_SESSION['headerName'], $_SESSION['username']); ?>
@@ -81,8 +81,8 @@ if (isset($_POST['submit'])) {
             echo '<p>';
             echo
                 "<form method='post'>
-            <input type='submit' name='quest_button' value='" . $item['title'] . "'>
-            </form>" . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . $item['body'] . "<br>";
+            <input type='submit' class='link-button' name='quest_button' value='" . $item['title'] . "'>
+            </form>" . $item['body'] . "<br>";
             echo '<p>';
 
         endforeach;

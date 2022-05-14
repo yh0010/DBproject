@@ -12,7 +12,7 @@ $username = $_SESSION['username'];
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     <title><?php echo $_SESSION['username']; ?>'s answers</title>
-    <link href="style.css" type="text/css" rel="stylesheet"/>
+    <link href="styles.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 <?php echo present_header($_SESSION['headerName'], $_SESSION['username']); ?>
@@ -20,7 +20,7 @@ $username = $_SESSION['username'];
 <div class="content">
 
 <?php
-$stmt = $conn->prepare("SELECT title,answer,atime,thumb_up FROM webuser natural join answer natural join question WHERE username = '$username' ");
+$stmt = $conn->prepare("SELECT title, answer,atime,thumb_up FROM webuser natural join answer, question where question.qid = answer.qid and username = '$username'");
 $stmt->execute();
 $stmt->store_result();
 $num_of_rows = $stmt->num_rows;
@@ -30,7 +30,7 @@ if ($num_of_rows == 0) {
 }
 else{
     echo "<p>All answers posted by $username: </p>";
-}
+
 $stmt->bind_result($title, $answer, $atime, $thumb_up);
 
 ?>
@@ -52,7 +52,7 @@ $stmt->bind_result($title, $answer, $atime, $thumb_up);
             $thumb_up = htmlspecialchars($thumb_up);
 
             echo "<tr>";
-            echo "<td><input type='submit' name='question_title_button' value='$title'></td>";
+            echo "<td><input type='submit' class='link-button' name='question_title_button' value='$title'></td>";
             echo "<td> $answer </td>";
             echo "<td> $atime </td>";
             echo "<td> $thumb_up </td>";
@@ -73,6 +73,7 @@ $stmt->bind_result($title, $answer, $atime, $thumb_up);
 
     </table>
 </form>
+    <?php }?>
 </div>
 </body>
 </html>

@@ -11,7 +11,7 @@ require 'format.inc.php';
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     <title>Dashboard</title>
-    <link href="style.css" type="text/css" rel="stylesheet"/>
+    <link href="styles.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 
@@ -46,8 +46,8 @@ function validate($data){
         $question_body = validate($item['body']);
         echo 
         "<form method='post'>
-        <input type='submit' name='1st_lvl_button' value='$question_title'>
-        </form>"."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$question_body."<br>";
+        <input type='submit' class='link-button' name='1st_lvl_button' value='$question_title'>
+        </form>".$question_body."<br>";
         echo '<p>';
 
     endforeach;

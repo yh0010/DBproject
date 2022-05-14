@@ -1,37 +1,49 @@
+<?php
+require 'format.inc.php';
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     <title>Login</title>
+    <link href="styles.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 
-<form method="POST" action="login.php">
+<header>
+    <h1>Heap Overflow</h1>
+</header>
 
-<h1>Login</h1>
-    <?php if (isset($_GET['error'])) { ?>
+<div class="main-container">
+    <div class="fixer-container">
+        <h3 style="margin-bottom: 25px;">Members Login</h3>
+        <form method="POST" action="login.php">
 
-    <p class="error"><?php echo $_GET['error']; ?></p>
+            <?php if (isset($_GET['error'])) { ?>
 
-    <?php } ?>
-    
-    <div>
-      <label>Username: </label>
-      <input type="text" name="username">
+                <p class="error"><?php echo $_GET['error']; ?></p>
+
+            <?php } ?>
+
+
+            <div>
+                <label>Username</label>
+                <input type="text" name="username">
+            </div>
+            <br>
+            <div>
+                <label>Password</label>
+                <input type="password" name="password">
+            </div>
+            <br>
+
+            <button type="submit">Login</button>
+
+        </form>
+
+        <p>Do not have an account? <a href="registration.php">Create one here!</a></p>
     </div>
-    <br>
-    <div>
-      <label>Password: </label>
-      <input type="password" name="password">
-    </div>
-    <br>
-    <input type="submit" name="submit" value="Submit" class="btn btn-dark w-10">
-    <p>Do not have an account? <a href="registration.php">Create one here!</a></p>
-</form>
-
-
-
-
-
+</div>
 </body>
 </html>

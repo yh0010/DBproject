@@ -16,7 +16,7 @@ require 'format.inc.php';
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     <title>New_Question</title>
-    <link href="style.css" type="text/css" rel="stylesheet"/>
+    <link href="styles.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 
@@ -25,7 +25,7 @@ require 'format.inc.php';
 </form>
 <h2>Please select tags first to begin..</h2>
         <?php
-            $mysqli = NEW mysqli('localhost', 'elaina2','123123', 'project');
+            $mysqli = NEW mysqli('localhost', 'root','mysqldbSECRET', 'question_answering');
             $set = $mysqli->query("SELECT tid, topicname FROM topic WHERE tid < 7");
         ?>
     <div>
@@ -127,14 +127,16 @@ require 'format.inc.php';
 
     if (isset($_POST['submit'])){
         if (empty($_POST['title']) || empty($_POST['body'])){
-            echo '<br>'.'Please fill out title and body before continue';
+
+            echo "<p class='message'> Please fill out title and body before continue.</p>";
+
             exit();
         } else {
             $title = $_POST['title'];
             $body = $_POST['body'];
 
             $sql = "INSERT INTO question(uid, title, body, qtime, resolved) 
-            VALUES (".$_SESSION['uid'].", '$title', '$body', CURRENT_TIMESTAMP, 'N')";
+            VALUES (".$_SESSION['uid'].", '$title', '$body', CURRENT_TIMESTAMP, 'Unsolved')";
             $result = mysqli_query($conn, $sql);
             if ($result) {
                 if (!empty($_SESSION['cat'])){
@@ -156,7 +158,9 @@ require 'format.inc.php';
                     if ($result3){}else{echo 'Error3: ' . mysqli_error($conn);}
                 }
 
-                echo '<br>'."Your question is successfully posted!";
+
+                echo "<p class='message'> Your question is successfully posted!</p>";
+
             }
             else {
                 echo 'Failed to post';

@@ -12,7 +12,7 @@ $username = $_SESSION['username'];
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     <title><?php echo $_SESSION['username']; ?>'s questions</title>
-    <link href="style.css" type="text/css" rel="stylesheet"/>
+    <link href="styles.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 <?php echo present_header($_SESSION['headerName'], $_SESSION['username']); ?>
@@ -53,7 +53,7 @@ $stmt->bind_result($title, $body, $qtime, $resolved);
             $resolved = htmlspecialchars($resolved);
 
             echo "<tr>";
-            echo "<td><input type='submit' name='question_title_button' value='$title'></td>";
+            echo "<td><input type='submit' class='link-button' name='question_title_button' value='$title'></td>";
             echo "<td> $body </td>";
             echo "<td> $qtime </td>";
             echo "<td> $resolved </td>";
