@@ -1,15 +1,21 @@
 ### Potential add-ons:
-* problem marked as 'solved' && user can select best answer
+* && user can select best answer
 * Adjust UI
-* Auto_increment problem, mysql innoDB does not allow resset value to be less than current
 * User can see its own recent activity, User can see their own Q & A
 * bookmark feature
-* User can edit profile
 * the thumbs_up is not correctly reflected on user account
 * B+ tree acceletrate?
 * ??git issue ??multi threading
 * lexical relevance ranking?
 * cookies?
+#### -------May 13--------
+* problem marked as 'solved' 
+唉我现在有点晕，
+我想想，
+反正基本上你上网看看就知道更新啥了。。我可能睡醒了再详细list一下。。
+不过有2个大改的地方就是，我把selecT_tag.php删了，合并到creaTE_question.php里，所以你那边可以直接删掉
+还有就是我稍微改了下banner颜色，因为深绿的话my page和profile和lougout几乎看不见（可能是我显示器问题），所以我改成了浅色系，这样看的比较清楚
+但是不知道为什么，你那个styles.css file好像锁死了一样我edit无效，所以我只能新建了一个style.css文件。。因为同名的文件就算我新建也无效。。
 
 #### -------May 12--------
 - Fixed bug: question titles with '' in them has errors.
