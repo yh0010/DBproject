@@ -8,10 +8,10 @@
 
 -------May 14--------
 
-user can select best answer for the question s/he created, not created by others
-question display selected best answer if there's one
-add warning to unselected tags when creating question
-change all warning format to match uniformly
+- user can select best answer for the question s/he created, not created by others
+- question display selected best answer if there's one
+- add warning to unselected tags when creating question
+- change all warning format to match uniformly
 
 -------May 13--------
 
