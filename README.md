@@ -8,7 +8,25 @@
 * ??git issue ??multi threading
 * lexical relevance ranking?
 * cookies?
+
 #### -------May 13--------
+---Rose---
+Fixed bugs: 
+- Fixed answers not showing in user’s own Q&A
+- Fixed warnings when no similar questions on show_answer page
+- Fixed showing N as the status of solved after inserting questions, changed it to Unsolved
+- Fixed thumb-ups shows twice when user sees his/her own answer
+
+Features added: 
+- Added/improved UI for all pages
+- Added a message when voting an answer that is voted before. 
+
+Bug found and unsolved:
+- If I did’t select any topic, I can still post a question. 
+
+PS: 我还是在用styles.css instead of style.css，所以你pull之后可能还得再调整成style.css
+
+
 * problem marked as 'solved' 
 唉我现在有点晕，
 我想想，
@@ -16,6 +34,8 @@
 不过有2个大改的地方就是，我把selecT_tag.php删了，合并到creaTE_question.php里，所以你那边可以直接删掉
 还有就是我稍微改了下banner颜色，因为深绿的话my page和profile和lougout几乎看不见（可能是我显示器问题），所以我改成了浅色系，这样看的比较清楚
 但是不知道为什么，你那个styles.css file好像锁死了一样我edit无效，所以我只能新建了一个style.css文件。。因为同名的文件就算我新建也无效。。
+
+
 
 #### -------May 12--------
 - Fixed bug: question titles with '' in them has errors.
