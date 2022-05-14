@@ -13,6 +13,7 @@
 
 #### -------May 13--------
 ---Rose---
+
 Fixed bugs: 
 - Fixed answers not showing in user’s own Q&A
 - Fixed warnings when no similar questions on show_answer page
