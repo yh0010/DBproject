@@ -28,7 +28,7 @@ Features added:
 - Added a message when voting an answer that is voted before.
 - Bug found and unsolved:
 
-[Fixed]~~If I did’t select any topic, I can still post a question. ~~
+[Fixed]~~If I did’t select any topic, I can still post a question.~~
 
 PS: 我还是在用styles.css instead of style.css，所以你pull之后可能还得再调整成style.css
 
