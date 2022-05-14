@@ -12,6 +12,7 @@
 - question display selected best answer if there's one
 - add warning to unselected tags when creating question
 - change all warning format to match uniformly
+- User cannot create duplicated question
 
 -------May 13--------
 
