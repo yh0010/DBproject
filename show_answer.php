@@ -193,7 +193,7 @@ mysqli_query($conn, $update_status);
                 if ($res_vote) {
                     $sql_vote_track = "INSERT INTO vote_track VALUES (" . $_SESSION['uid'] . ", $qid, $vote_aid)";
                     mysqli_query($conn, $sql_vote_track);
-                    header('Location: show_answer.php');
+                    echo("<script>location.href = 'show_answer.php';</script>");
                 } else {
                     echo 'Error: ' . mysqli_error($conn);
                 }
