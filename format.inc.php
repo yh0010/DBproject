@@ -8,7 +8,7 @@ Hey, $username!
 <a href="mypage.php">My Page</a>
 <a href="dashboard.php">Main Dashboard</a>
 <a href="logout.php">Log Out</a></p></nav>
-<h1>$title</h1>
+<a href="dashboard.php"><h1>$title</h1></a>
 </header>
 HTML;
 

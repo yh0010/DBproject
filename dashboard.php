@@ -9,16 +9,22 @@ require 'format.inc.php';
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     <title>Dashboard</title>
-    <link href="styles.css" type="text/css" rel="stylesheet"/>
+    <link href="style.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
-<?php echo present_header("CS Answers", $_SESSION['username']); ?>
+<?php echo present_header($_SESSION['headerName'], $_SESSION['username']); ?>
 
 <div class="content">
     <div class="form">
+    <form action='create_question.php' method="post">
+    <p>
+        <?php echo "Didn't find what you are looking for? "; ?>
+        
+        <input type="submit" name='create_quest' value="Ask New Question"</p>
+    </form>
 
 
-        <p>
+        <br><p>
         <form method='post'>
             <textarea name="question" cols=50 rows=3
                       placeholder="Enter your question here to begin searching..."></textarea>
@@ -26,7 +32,7 @@ require 'format.inc.php';
         </form>
     </div>
 
-    <p>Search by topics:</p>
+    <br><p>Search by topics:</p><br>
     <?php
     //we need to obtain user id for later use. user id is stored into session array.
     $sql_uid = "SELECT uid FROM webuser WHERE username = '" . $_SESSION['username'] . "'";
@@ -37,7 +43,7 @@ require 'format.inc.php';
     $sql = "SELECT topicname FROM topic WHERE parent is NULL";
     $result = mysqli_query($conn, $sql);
     $feedback = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
+    
     //enable topic name itself becomes a button
     foreach ($feedback as $item):
         echo "<form class = 'topics_form' method='post'>
@@ -52,19 +58,6 @@ require 'format.inc.php';
     }
     ?>
 
-    <br>
-
-
-
-<!-- <style>
-div {
-  background-color: lightgrey;
-  width: 300px;
-  border: 15px solid green;
-  padding: 50px;
-  margin: 20px;
-}
-</style> -->
 <?php
 //above is topic selection search. This is typing search.
 //when submit button is clicked, begin string comparison searching from database.
@@ -83,6 +76,7 @@ if (isset($_POST['submit'])) {
             echo 'Error: ' . mysqli_error($conn);
         }
         echo "<h3>Following questions are found:</h3>";
+        if (empty($return )){echo "No question is found under this keyword";}
         foreach ($return as $item):
             echo '<p>';
             echo
@@ -93,7 +87,7 @@ if (isset($_POST['submit'])) {
 
         endforeach;
     } else {
-        echo 'Please type a question/key word to begin the search';
+        echo '<br>'.'Please type a question/key word to begin the search';
     }
 }
 

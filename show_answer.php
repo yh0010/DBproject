@@ -2,7 +2,7 @@
 include("auth_session.php");
 include('connectdb.php');
 require 'format.inc.php';
-
+$uid 
 ?>
 
 <!DOCTYPE html>
@@ -10,10 +10,10 @@ require 'format.inc.php';
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     <title>Answers</title>
-    <link href="styles.css" type="text/css" rel="stylesheet"/>
+    <link href="style.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
-<?php echo present_header("CS Answers", $_SESSION['username']); ?>
+<?php echo present_header($_SESSION['headerName'], $_SESSION['username']); ?>
 
 <div class="content">
 
@@ -35,9 +35,32 @@ function validate($data){
 
 //display all questions listed under a certain topic where topicname = ButtonName
 if (isset($_SESSION['ButtonName'])) {
-    echo '<p><h3>'.$_SESSION['ButtonName'].'</h3></p>';
-
     $question_title = validate_escape($conn, $_SESSION['ButtonName']);
+    $sql_solved = "Select qid, uid, resolved from question where qid = (SELECT qid FROM question WHERE title = '$question_title')";
+    $r_row = mysqli_fetch_row(mysqli_query($conn, $sql_solved));
+
+        if ($r_row[1] == $_SESSION['uid']){
+            echo '<form method="post">'.
+            '<input type="submit" name="sol_submit" value="Solved">'.
+            '<input type="submit" name="sol_submit" value="Unsolved">'.
+        '</form>';
+        }
+    echo '<h2>'.'['.$r_row[2].']'.'</h2>';
+    
+    if (isset($_POST['sol_submit'])){
+        $sol = $_POST['sol_submit'];
+        $sql_change_sol = "UPDATE question
+        SET
+            resolved = '$sol',
+            qtime = qtime
+        WHERE
+            qid = $r_row[0]";
+        $res_change_sol = mysqli_query($conn, $sql_change_sol);
+        header('Location: show_answer.php');
+    }
+     
+    echo '<p><h3>'.$question_title.'</h3></p>';
+
 
     $sql_quest = "SELECT * FROM question JOIN webuser USING(uid) WHERE title = '$question_title'";
     $row = mysqli_fetch_row(mysqli_query($conn, $sql_quest));
@@ -53,19 +76,49 @@ if (isset($_SESSION['ButtonName'])) {
     if (empty($ret)){echo "<h4>No answer is found.</h4>";}
     $count = 1;
     foreach ($ret as $item):
+        $nam = $item['username'];
+        $aid_real = $item['aid'];
+        if ($r_row[1] == $_SESSION['uid']){
+            echo "<form method='post'><input type='submit' name='upvote_button' value=vote($aid_real)$nam>"."\n".$item['thumb_up']."</form>";
+        }
         echo '<p>'.
-            $count."<br>".$item['answer']."<br>".
+        "<br>".$count."<form method='post'><input type='submit' name='upvote_button' value=vote($aid_real)$nam>"."\n".$item['thumb_up']."</form>"
+            .$item['answer'].
             $item['atime']."<br>".$item['username']."\n".$item['status']."\n".$item['points']
         .'</p>';
         $count += 1;
     endforeach;
-
     //obtain the next aid and the current qid to use for adding new answer
     $aid = $count;
     $qid = $row[1];
 
+    if (isset($_POST['upvote_button'])){
+        $vote_nam = substr($_POST['upvote_button'], 7);
+        $vote_aid = $_POST['upvote_button'][5];
+    //(select uid from webuser where username = '$vote_nam')
+        $sql_check_vote = "SELECT * FROM vote_track WHERE uid = ".$_SESSION['uid']." and qid = $qid and aid = $vote_aid";
+        $res_check_vote  = mysqli_fetch_all(mysqli_query($conn, $sql_check_vote));
+
+        if (empty($res_check_vote)){
+        $sql_vote = "UPDATE answer
+        SET
+            thumb_up = thumb_up+1,
+            atime = atime
+        WHERE
+            aid = $vote_aid and qid = $qid";
+        $res_vote  = mysqli_query($conn, $sql_vote);
+        if ($res_vote){
+            $sql_vote_track = "INSERT INTO vote_track VALUES (".$_SESSION['uid'].", $qid, $vote_aid)";
+            mysqli_query($conn, $sql_vote_track);
+            header('Location: show_answer.php');
+        }
+        else {echo 'Error: ' . mysqli_error($conn);}
+    }
+    }
+
+    
     echo '<div>'.
-        '<form method="post">'.
+    "<br>".'<form method="post">'.
             '<textarea name="answer" cols=50 rows=3 placeholder="Write your new answer here..."></textarea>'.
             '<div><input type="submit" name="ans_submit" value="Submit"></div>'.
         '</form>'.
@@ -112,7 +165,7 @@ if (isset($_SESSION['ButtonName'])) {
     endforeach;}
     if (isset($_POST['q_button'])) {
         $_SESSION['ButtonName'] = $_POST['q_button'];
-        header('Location: show_answer.php');
+        echo("<script>location.href = 'show_answer.php';</script>");
     }
 ?>
 </div>
