@@ -16,7 +16,7 @@ require 'format.inc.php';
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     <title>New_Question</title>
-    <link href="styles.css" type="text/css" rel="stylesheet"/>
+    <link href="style.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 
@@ -25,7 +25,7 @@ require 'format.inc.php';
 </form>
 <h2>Please select tags first to begin..</h2>
         <?php
-            $mysqli = NEW mysqli('localhost', 'root','mysqldbSECRET', 'question_answering');
+            $mysqli = NEW mysqli('localhost', 'elaina2','123123', 'project');
             $set = $mysqli->query("SELECT tid, topicname FROM topic WHERE tid < 7");
         ?>
     <div>

@@ -7,7 +7,7 @@ require 'format.inc.php';
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     <title>Login</title>
-    <link href="styles.css" type="text/css" rel="stylesheet"/>
+    <link href="style.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 

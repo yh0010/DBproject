@@ -12,7 +12,7 @@ $username = $_SESSION['username'];
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     <title><?php echo $_SESSION['username']; ?>'s answers</title>
-    <link href="styles.css" type="text/css" rel="stylesheet"/>
+    <link href="style.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 <?php echo present_header($_SESSION['headerName'], $_SESSION['username']); ?>
