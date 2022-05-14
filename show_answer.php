@@ -14,6 +14,31 @@ require 'format.inc.php';
 <body>
 <?php echo present_header($_SESSION['headerName'], $_SESSION['username']); ?>
 
+<?php
+
+
+$drop_view = "drop view if exists thumb_ups";
+$get_thumb_ups = "create view thumb_ups as(
+select uid, sum(thumb_up) as total_thumb_up
+from answer
+group by uid
+);";
+$update_status = "update webuser join thumb_ups on webuser.uid = thumb_ups.uid
+set points = total_thumb_up,  status = (case
+										  when total_thumb_up >= 1000
+										  then 'Expert'
+										  when total_thumb_up < 1000 and total_thumb_up >=500
+										  then 'Advanced'
+										  when total_thumb_up < 500
+										  then 'Basic'
+										end) 
+where webuser.points != thumb_ups.total_thumb_up and webuser.uid <> 0;";
+
+mysqli_query($conn, $drop_view);
+mysqli_query($conn, $get_thumb_ups);
+mysqli_query($conn, $update_status);
+?>
+
 <div class="content">
 
     <?php
@@ -115,7 +140,7 @@ require 'format.inc.php';
             echo "<hr>";
             if ($r_row[1] == $_SESSION['uid']){
             echo "<form method='post'>
-            <input type='submit' class='form-control' name='best_button' value='choose best answer($aid_real)'>
+            <button type='submit' class='form-control' name='best_button' value='choose best answer($aid_real)'><img src='check_mark.png' height='20'></button>
             </form>";
         }
 

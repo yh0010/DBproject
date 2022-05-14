@@ -25,7 +25,7 @@ require 'format.inc.php';
 </form>
 <h2>Please select tags first to begin..</h2>
         <?php
-            $mysqli = NEW mysqli('localhost', 'elaina2','123123', 'project');
+            $mysqli = NEW mysqli('localhost', 'root','mysqldbSECRET', 'question_answering');
             $set = $mysqli->query("SELECT tid, topicname FROM topic WHERE tid < 7");
         ?>
     <div>

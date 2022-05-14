@@ -1,19 +1,16 @@
 ### Potential add-ons:
-* User can see its own recent activity
+* && user can select best answer
+* Adjust UI
+* User can see its own recent activity, User can see their own Q & A
 * bookmark feature
+* the thumbs_up is not correctly reflected on user account
 * B+ tree acceletrate?
 * ??git issue ??multi threading
 * lexical relevance ranking?
 * cookies?
-#### -------May 14--------
-- user can select best answer for the question s/he created, not created by others
-- question display selected best answer if there's one
-- add warning to unselected tags when creating question
-- change all warning format to match uniformly
 
 #### -------May 13--------
 ---Rose---
-
 Fixed bugs: 
 - Fixed answers not showing in user’s own Q&A
 - Fixed warnings when no similar questions on show_answer page
@@ -25,16 +22,20 @@ Features added:
 - Added a message when voting an answer that is voted before. 
 
 Bug found and unsolved:
-- [Fixed]~~If I did’t select any topic, I can still post a question. ~~ 
+- If I did’t select any topic, I can still post a question. 
 
 PS: 我还是在用styles.css instead of style.css，所以你pull之后可能还得再调整成style.css
 
----Elaina---
-- User can change question status [Solved/Unsolved] when the question created by user, not others
-- create a new table in database -'vote_track'- to support tracking user votings on different answers
-- enable voting feature with restriction that user can only vote it once for every answer
-- combined select_tag.php and create_question.php
-- Fix header() warning
+
+* problem marked as 'solved' 
+唉我现在有点晕，
+我想想，
+反正基本上你上网看看就知道更新啥了。。我可能睡醒了再详细list一下。。
+不过有2个大改的地方就是，我把selecT_tag.php删了，合并到creaTE_question.php里，所以你那边可以直接删掉
+还有就是我稍微改了下banner颜色，因为深绿的话my page和profile和lougout几乎看不见（可能是我显示器问题），所以我改成了浅色系，这样看的比较清楚
+但是不知道为什么，你那个styles.css file好像锁死了一样我edit无效，所以我只能新建了一个style.css文件。。因为同名的文件就算我新建也无效。。
+
+
 
 #### -------May 12--------
 - Fixed bug: question titles with '' in them has errors.
