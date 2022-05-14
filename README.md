@@ -17,19 +17,20 @@
 
 ---Rose---
 
-- Fixed bugs:
+Fixed bugs:
 - Fixed answers not showing in user’s own Q&A
 - Fixed warnings when no similar questions on show_answer page
 - Fixed showing N as the status of solved after inserting questions, changed it to Unsolved
 - Fixed thumb-ups shows twice when user sees his/her own answer
-- Features added:
 
+Features added:
 - Added/improved UI for all pages
 - Added a message when voting an answer that is voted before.
 - Bug found and unsolved:
 
-- [Fixed]~~If I did’t select any topic, I can still post a question. ~~
-- PS: 我还是在用styles.css instead of style.css，所以你pull之后可能还得再调整成style.css
+[Fixed]~~If I did’t select any topic, I can still post a question. ~~
+
+PS: 我还是在用styles.css instead of style.css，所以你pull之后可能还得再调整成style.css
 
 ---Elaina---
 
