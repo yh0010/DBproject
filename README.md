@@ -1,3 +1,7 @@
+live feature run-through demo video: https://youtu.be/irmqbkIU0p8
+
+
+-----------------------------Below is the log we have kept throughout the entire implementation of the project, read the report(from resume blue link) to see more detailed explanations------------------------
 ### Potential add-ons:
 * User can see its own recent activity
 * bookmark feature
